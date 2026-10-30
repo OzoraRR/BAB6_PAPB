@@ -1,28 +1,36 @@
-# NavigationLab Praktikum 06
+# Praktikum 06 — Arsitektur Aplikasi Android
 
-Ozora Nathalnael Purba - 245150207111102
+**Nama:** Ozora Nathalnael Purba  
+**NIM:** 245150207111102  
+**Kelas:** TIF D
 
-## Jalankan di Android Studio
+## Deskripsi
+Praktikum ini melanjutkan project NavigationLab dengan menerapkan separation of concerns, yaitu pemisahan tanggung jawab tampilan, pengelolaan state, dan akses data.
 
-1. Ekstrak ZIP ini.
-2. Pilih Open di Android Studio, lalu pilih folder NavLab yang berisi settings.gradle.kts.
-3. Pilih lokasi Android SDK pada komputer Anda jika diminta.
-4. Lakukan Gradle Sync. Sinkronisasi pertama memerlukan internet untuk dependency yang belum ada di cache.
-5. Pilih emulator atau perangkat Android (minimal API 24), lalu klik Run app.
+## Struktur Arsitektur
+- **UI:** Menampilkan data dan meneruskan interaksi pengguna melalui callback.
+- **ViewModel:** Mengelola HomeUiState dan DetailUiState.
+- **Repository:** Menjadi penghubung antara ViewModel dan sumber data.
+- **Data Source:** Menyediakan data mahasiswa secara in-memory.
 
-Project memakai Gradle Wrapper 9.6.0, AGP 9.4.1, compileSdk/targetSdk 37, dan toolchain JDK 25 sesuai konfigurasi project yang telah diuji. Gunakan versi Android Studio yang mendukung AGP tersebut. File local.properties dibuat lokal oleh Android Studio; file lokasi SDK komputer pembuat tidak disertakan.
+Aliran data:
+UI → ViewModel → StudentRepository → StudentLocalDataSource.
 
-## Build melalui terminal
+## Fitur
+- Home menampilkan lima mahasiswa dengan ID dan nama.
+- Pemilihan mahasiswa membuka Detail berdasarkan ID.
+- Detail menampilkan nama, program studi, dan angkatan.
+- Navigasi Profile, About, dan Kembali.
+- Penanganan ID mahasiswa yang tidak ditemukan.
 
-Linux/macOS:
-    ./gradlew :app:assembleDebug
+## Teknologi
+Kotlin, Jetpack Compose, Navigation Compose, dan ViewModel. State menggunakan mutableStateOf tanpa penambahan Room, REST API, atau Flow.
 
-Windows:
-    gradlew.bat :app:assembleDebug
+## Cara Menjalankan
+1. Buka folder NavLab di Android Studio.
+2. Lakukan Gradle Sync.
+3. Pilih emulator atau perangkat Android.
+4. Klik Run app.
 
-APK hasil build:
-    app/build/outputs/apk/debug/app-debug.apk
-
-Home memuat lima mahasiswa. Pilih salah satu untuk membuka Detail; Profile, About, dan tombol Kembali tersedia.
-
-Source aplikasi ini telah berhasil di-build, dengan 9 unit test dan 7 tes emulator lulus pada pengujian 29 Oktober 2026.
+## Kesimpulan
+Pemisahan layer membuat kode lebih terstruktur, mudah diuji, dan mudah dikembangkan tanpa mencampurkan logika data dengan tampilan.
